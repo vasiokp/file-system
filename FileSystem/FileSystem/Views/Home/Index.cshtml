@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>File System</title>
+	<script src="~/scripts/angular.min.js"></script>
+	<link href="~/Content/main.css" rel="stylesheet" />
+</head>
+<body ng-app="fileSystem">
+    <div class="container">
+		<div class="content" ng-controller="mainCtrl">
+			<table class="counts">
+				<tr>
+					<th>Less 10Mb</th>
+					<th>10Mb-50Mb</th>
+					<th>More 100Mb</th>
+				</tr>
+				<tr>
+					<td>
+						<span style="{{loaderState}}"><img src="~/images/loader.gif" /></span>
+						<span style="{{textState}}">{{counts.FirstCount}}</span>
+					</td>
+					<td>
+						<span style="{{loaderState}}"><img src="~/images/loader.gif" /></span>
+						<span style="{{textState}}">{{counts.SecondCount}}</span>
+					</td>
+					<td>
+						<span style="{{loaderState}}"><img src="~/images/loader.gif" /></span>
+						<span style="{{textState}}">{{counts.ThirdCount}}</span>
+					</td>
+				</tr>
+			</table>
+			<p>
+				<span class="path-title">Current path:</span>
+				<span class="path-body">{{directory.Path}}</span>
+			</p>
+			<table class="browser">
+				<tr>
+					<th>Name</th>
+					<th>Size</th>
+					<th>Date modified</th>
+				</tr>
+				<tr>
+					<td class="backward" id="{{setId(directory.Path)}}" ng-click="browse(directory.Path, 'backward')"><a href="#">[..]</a></td>
+					<td class="size"></td>
+					<td class="dateModified"></td>
+				</tr>
+				<tr ng-repeat="x in directory.Directories">
+					<td class="directory" ng-click="browse(directory.Path, x.Path)"><a href="#">{{x.Name}}</a></td>
+					<td class="size"></td>
+					<td class="dateModified">{{x.DateModified}}</td>
+				</tr>
+				<tr ng-repeat="x in directory.Files">
+					<td class="file">{{x.Name}}</td>
+					<td class="size">{{x.Size}}</td>
+					<td class="dateModified">{{x.DateModified}}</td>
+				</tr>
+			</table>
+		</div>
+    </div>
+	<script src="~/scripts/main.js"></script>
+</body>
+</html>
